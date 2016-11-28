@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFechasTable extends Migration
+class CreateRegistroTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,6 @@ class CreateFechasTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('fechas', function($table)
-      {        
-        $table->increments('id');
-        $table->date('fecha');
-        $table->timestamps();
-      });
         //
     }
 
@@ -30,6 +23,5 @@ class CreateFechasTable extends Migration
     public function down()
     {
         //
-        Schema::drop('fechas');
     }
 }

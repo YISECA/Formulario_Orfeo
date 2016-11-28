@@ -18,6 +18,38 @@ jQuery(document).ready(function($) {
 	$('body').delegate('#adelante','click',function(){var id= $(this).data('id');$("#page"+id).hide();$("#page"+(id+1)).show();$('#form_gen')});	
  	$('body').delegate('#atras','click',function(){var id= $(this).data('id');$("#page"+id).hide();$("#page"+(id-1)).show();});
 
+ 	var horas = $.parseJSON($('input[name="horas-json"]').val());
+
+ 	$('select[name="fecha"]').on('change', function(e)
+	{
+
+		var id_fecha = $(this).val();
+
+		var horas_fechas = $.grep(horas, function(o, i){
+			return o.id_fecha == id_fecha;
+		});
+
+		//console.log(horas_fechas);
+
+		if (horas_fechas.length > 0)
+
+		{
+
+			$('select[name="hora"]').html('<option value="">Seleccionar</option>');
+
+			$.each(horas_fechas, function(i, e)
+
+				   {
+
+				$('select[name="hora"]').append('<option value="'+e.id+'">'+e.hora+'</option>');
+
+			});
+
+		}
+
+	});
+
+
 /*
     $.ajax({url:'listar_pais',type:  'post',success:  function (response) {$('#id_pais').html(response); }});
     $.ajax({url:'listar_ciudad',type:  'post',success:  function (response) {$('#id_ciudad').html(response); }});

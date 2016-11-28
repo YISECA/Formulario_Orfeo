@@ -8,7 +8,14 @@ class Form extends Model
 {
     //
 
-   protected $table = 'CERRO_ELEFANTE_2016_III';
+   protected $table = 'registro';
+
+   public function horas(){
+  
+  return $this->belongsTo('App\Horas','hora');
+
+   }
+
 
    public function ciudad(){
 	

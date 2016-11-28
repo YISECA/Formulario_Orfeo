@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {                
-    return view('form');
-});
+
+Route::any('/','FormController@index');
 
 Route::get('descarga', function () {                
     return view('descarga');

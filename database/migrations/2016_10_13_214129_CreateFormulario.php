@@ -19,14 +19,10 @@ class CreateFormulario extends Migration
         $table->bigInteger('cedula');
         $table->enum('tipo_documento',array('Cédula de Ciudadania', 'Cédula de Extranjeria'));    
         $table->text('primer_nombre');
-        $table->text('segundo_nombre');
         $table->text('primer_apellido');
-        $table->text('segundo_apellido');
-        $table->enum('genero', array('Masculino', 'Femenino'));
-        $table->date('fecha_nacimiento');
-        $table->text('mail');
-        $table->text('celular');    
-        $table->text('eps');
+        $table->text('area');
+        $table->integer('fecha');
+        $table->integer('hora');
         $table->timestamps();
       });
         //

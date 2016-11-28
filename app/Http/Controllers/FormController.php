@@ -19,6 +19,10 @@ use Session;
 
 use App\Form;
 
+use App\Fechas;
+
+use App\Horas;
+
 use Idrd\Usuarios\Repo\Departamento;
 
 use Idrd\Usuarios\Repo\Pais;
@@ -41,7 +45,16 @@ class FormController extends BaseController
 
     var $url;
 
+    public function index()
+    {
 
+      //$fechas = Fechas::with('horas')->get();
+      $fechas = Fechas::all();
+      $horas = Horas::all();
+
+      //dd($fechas); exit();
+      return view('form',["fechas"=>$fechas, "horas"=>$horas,]);
+    }
 
     private function cifrar($M)
 
@@ -82,15 +95,11 @@ class FormController extends BaseController
              <th style="text-transform: capitalize;">id</th>
              <th style="text-transform: capitalize;">cedula</th>
              <th style="text-transform: capitalize;">tipo_documento</th>
-             <th style="text-transform: capitalize;">primer_nombre</th>
-             <th style="text-transform: capitalize;">segundo_nombre</th>
-             <th style="text-transform: capitalize;">primer_apellido</th>
-             <th style="text-transform: capitalize;">segundo_apellido</th>
-             <th style="text-transform: capitalize;">genero</th>
-             <th style="text-transform: capitalize;">fecha_nacimiento</th>
-             <th style="text-transform: capitalize;">mail</th>
-             <th style="text-transform: capitalize;">celular</th>
-             <th style="text-transform: capitalize;">eps</th>          
+             <th style="text-transform: capitalize;">nombres</th>
+             <th style="text-transform: capitalize;">apellidos</th>
+             <th style="text-transform: capitalize;">área</th>
+             <th style="text-transform: capitalize;">fecha</th>
+             <th style="text-transform: capitalize;">hora</th>
             </tr>
         </thead>
         <tbody id="tabla">';
@@ -101,14 +110,10 @@ class FormController extends BaseController
        $tabla.='<td>'.$value->cedula.'</td>';
        $tabla.='<td>'.$value->tipo_documento.'</td>';
        $tabla.='<td>'.$value->primer_nombre.'</td>';
-       $tabla.='<td>'.$value->segundo_nombre.'</td>';
        $tabla.='<td>'.$value->primer_apellido.'</td>';
-       $tabla.='<td>'.$value->segundo_apellido.'</td>';
-       $tabla.='<td>'.$value->genero.'</td>';
-       $tabla.='<td>'.$value->fecha_nacimiento.'</td>';
-       $tabla.='<td>'.$value->mail.'</td>';
-       $tabla.='<td>'.$value->celular.'</td>';
-       $tabla.='<td>'.$value->eps.'</td></tr>';
+       $tabla.='<td>'.$value->area.'</td>';
+       $tabla.='<td>'.$value->fecha.'</td>';
+       $tabla.='<td>'.$value->hora.'</td></tr>';
        
 
       }
@@ -160,16 +165,14 @@ class FormController extends BaseController
        $formulario = new Form([]);
         
         //envio de correo
-
-       if($this->inscritos()<=40){
+        $registros = $this->inscritos($request->input('hora'));
+        var_dump($registros->count());
+        //exit();
+       if($registros->count() <= 1){
 
         $this->store($formulario, $request->input());
 
-        Mail::send('email', ['user' => $request->input('mail')], function ($m) use ($request) {
-            $m->from('no-reply@epaf.com', 'Registro Exitoso CAMINATA CERRO ELEFANTE');
-
-            $m->to($request->input('mail'), $request->input('primer_nombre'))->subject('Registro Exitoso CAMINATA CERRO ELEFANTE!');
-        });
+        
       }else{
 
         return view('error', ['error' => 'Lo sentimos el limite de inscritos fue superado!']);
@@ -233,28 +236,20 @@ class FormController extends BaseController
 
     }
 
-  
-// conteo de la tabla
-    private function inscritos(){
-      $cant = Form::count('id');
-      return $cant+1;
+    private function inscritos($hora){
+      $registros = Form::where('hora', $hora)->get();
+      return $registros;
     }
 
     private function store($formulario, $input)
     {
-
-        
         $formulario['cedula'] = $input['cedula'];
         $formulario['tipo_documento'] = $input['tipo_documento'];
         $formulario['primer_nombre'] = $input['primer_nombre'];
-        $formulario['segundo_nombre'] = $input['segundo_nombre'];
         $formulario['primer_apellido'] = $input['primer_apellido'];
-        $formulario['segundo_apellido'] = $input['segundo_apellido'];
-        $formulario['genero'] = $input['genero'];
-        $formulario['fecha_nacimiento'] = $input['fecha_nacimiento'];
-        $formulario['mail'] = $input['mail'];
-        $formulario['celular'] = $input['celular'];
-        $formulario['eps'] = $input['eps'];
+        $formulario['area'] = $input['area'];
+        $formulario['fecha'] = $input['fecha'];
+        $formulario['hora'] = $input['hora'];
         $formulario->save();
 
         return $formulario;

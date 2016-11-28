@@ -4,15 +4,36 @@
 
 
     <link rel="stylesheet" type="text/css" href="public/Css/form.css">
-    <h2>Inscripción Capacitaciones ORFEO</h2>
+    <h2>Inscripción Capacitación ORFEO</h2>
     
 	<form method="POST" action="insertar" id="form_gen" enctype="multipart/form-data">
 
-	
+	<input type="hidden" name="horas-json" id="horas-json" value="{{ $horas }}"></input>
     <section id="page1">
-    	<div class="panel panel-default">
+    <div class="panel panel-default">
   	<div class="panel-heading">Información Personal</div>
   	<div class="panel-body">
+
+  	<div class="row">
+  <div class="col-md-6">
+  <label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Nombres
+    <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
+    <label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px"></label></div>
+
+  <div class="col-md-6">
+  <label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Apellidos 
+   <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
+   <label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px"></label></div>
+
+  <div class="col-md-6"><input required type="text" class="form-control" id="primer_nombre" name="primer_nombre" ></div>
+  <div class="col-md-6"><input required type="text" class="form-control" id="primer_apellido" name="primer_apellido" ></div>
+  <div class="col-md-6">.col-md-6</div>
+  <div class="col-md-6">.col-md-6</div>
+  <div class="col-md-6">.col-md-6</div>
+  <div class="col-md-6">.col-md-6</div>
+  <div class="col-md-6">.col-md-6</div>
+  <div class="col-md-6">.col-md-6</div>
+</div>
     
 		<fieldset class="form-group">
 			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput">Documento de identidad <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
@@ -31,7 +52,7 @@
 		</fieldset>
 
 		<fieldset class="form-group" >
-			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Primer Nombre <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
+			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Nombres<span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
 			</label>
@@ -39,15 +60,7 @@
 		</fieldset>
 
 		<fieldset class="form-group" >
-			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Segundo Nombre </label>
-			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
-			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
-			</label>
-			<input required type="text" class="form-control" id="segundo_nombre" name="segundo_nombre" value=" ">
-		</fieldset>
-
-		<fieldset class="form-group" >
-			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Primer Apellido <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
+			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Apellidos <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
 			</label>
@@ -62,18 +75,8 @@
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 			Digite Su área
 			</label>
-			<input required type="mail" class="form-control" id="mail" name="mail" >
+			<input required type="text" class="form-control" id="area" name="area" >
 		</fieldset>
-
-
-		<fieldset class="form-group" >
-			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">Segundo Apellido <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span></label>
-			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
-			Diligenciar en MAYÚSCULA y tal cual como aparece en el documento de identidad
-			</label>
-			<input required type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" >
-		</fieldset>
-
 		
 		<fieldset class="form-group">
 			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">
@@ -82,25 +85,25 @@
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 			Seleccione fecha
 			</label>
-			<select  required name="genero" id="genero" class="form-control" >
+			<select  required name="fecha" id="fecha" class="form-control" >
 				<option value="">Seleccione</option>
-				<option value="1">Masculino</option>
-				<option value="2">Femenino</option>
+				@foreach ($fechas as $fecha)
+				    <option value="{{ $fecha->id }}">{{ $fecha->fecha}}</option>
+				@endforeach
 			</select>
 		</fieldset>
 
 		
 		<fieldset class="form-group">
-			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2">
+			<label class="freebirdFormviewerViewItemsItemItemTitle" for="formGroupExampleInput2" >
 			Hora para asistir a la capacitación <span style="color: red;font-size: 11px;text-transform: capitalize;color:red">(Campo Obligatorio)</span>
 			</label>
 			<label class="freebirdFormviewerViewItemsPagebreakDescriptionText" style="font-size:11px">
 			Seleccione hora
 			</label>
-			<select  required name="genero" id="genero" class="form-control" >
+			<select  required name="hora" id="hora" class="form-control" >
 				<option value="">Seleccione</option>
-				<option value="1">Masculino</option>
-				<option value="2">Femenino</option>
+				
 			</select>
 		</fieldset>
 		

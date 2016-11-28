@@ -41,7 +41,7 @@
 
             @show
 
-      <title>CAMINATA CERRO DEL ELEFANTE</title>
+      <title>Inscripciones Capacitación Orfeo</title>
   </head>
 
   <body>
@@ -83,8 +83,8 @@
           <div class="page-header" id="banner">
             <div class="row">
               <div class="col-lg-8 col-md-7 col-sm-6">
-                <h1>IDRD</h1>
-                <center<p class="lead"><h1>CAMINATA CERRO DEL ELEFANTE</h1></p>
+                <h1>CAPACITACIONES</h1>
+                <!--<center<p class="lead"><h1>CAMINATA CERRO DEL ELEFANTE</h1></p>-->
               </div>
               <div class="col-lg-4 col-md-5 col-sm-6">
                  <div align="right"> 

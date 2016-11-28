@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFechasTable extends Migration
+class CreateHorasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateFechasTable extends Migration
     public function up()
     {
         //
-        Schema::create('fechas', function($table)
+        Schema::create('horas', function($table)
       {        
         $table->increments('id');
-        $table->date('fecha');
+        $table->integer('id_fecha');
+        $table->time('hora');
+        $table->integer('cupo');
         $table->timestamps();
       });
         //
@@ -30,6 +32,6 @@ class CreateFechasTable extends Migration
     public function down()
     {
         //
-        Schema::drop('fechas');
+        Schema::drop('horas');
     }
 }
