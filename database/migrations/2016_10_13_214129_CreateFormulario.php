@@ -16,11 +16,10 @@ class CreateFormulario extends Migration
       Schema::create('registro', function($table)
       {        
         $table->increments('id');
-        $table->bigInteger('cedula');
-        $table->enum('tipo_documento',array('Cédula de Ciudadania', 'Cédula de Extranjeria'));    
-        $table->text('primer_nombre');
-        $table->text('primer_apellido');
+        $table->bigInteger('cedula'); 
+        $table->text('primer_nombre');      
         $table->text('area');
+        $table->text('cargo');
         $table->integer('fecha');
         $table->integer('hora');
         $table->timestamps();
