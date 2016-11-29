@@ -13,6 +13,7 @@
 
 
 Route::any('/','FormController@index');
+Route::any('registro','FormController@index');
 
 Route::get('descarga', function () {                
     return view('descarga');

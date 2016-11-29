@@ -87,17 +87,16 @@ class FormController extends BaseController
 
     public function listar_datos(){
 
-    $acceso = Form::whereYear('created_at', '=', date('Y'))->get(); 
-
+    $acceso = Form::with('horas', 'horas.fecha')->whereYear('created_at', '=', date('Y'))->get(); 
+    
     $tabla='<table id="lista">
         <thead>
            <tr>
              <th style="text-transform: capitalize;">id</th>
-             <th style="text-transform: capitalize;">cedula</th>
-             <th style="text-transform: capitalize;">tipo_documento</th>
-             <th style="text-transform: capitalize;">nombres</th>
-             <th style="text-transform: capitalize;">apellidos</th>
+             <th style="text-transform: capitalize;">cédula</th>
+             <th style="text-transform: capitalize;">nombres</th>          
              <th style="text-transform: capitalize;">área</th>
+             <th style="text-transform: capitalize;">cargo</th>
              <th style="text-transform: capitalize;">fecha</th>
              <th style="text-transform: capitalize;">hora</th>
             </tr>
@@ -107,13 +106,12 @@ class FormController extends BaseController
      
 
        $tabla.='<tr><td>'.$value->id.'</td>';
-       $tabla.='<td>'.$value->cedula.'</td>';
-       $tabla.='<td>'.$value->tipo_documento.'</td>';
+       $tabla.='<td>'.$value->cedula.'</td>';    
        $tabla.='<td>'.$value->primer_nombre.'</td>';
-       $tabla.='<td>'.$value->primer_apellido.'</td>';
        $tabla.='<td>'.$value->area.'</td>';
-       $tabla.='<td>'.$value->fecha.'</td>';
-       $tabla.='<td>'.$value->hora.'</td></tr>';
+       $tabla.='<td>'.$value->cargo.'</td>';
+       $tabla.='<td>'.$value->horas->fecha['fecha'].'</td>';
+       $tabla.='<td>'.$value->horas['hora'].'</td></tr>';
        
 
       }
@@ -244,10 +242,9 @@ class FormController extends BaseController
     private function store($formulario, $input)
     {
         $formulario['cedula'] = $input['cedula'];
-        $formulario['tipo_documento'] = $input['tipo_documento'];
         $formulario['primer_nombre'] = $input['primer_nombre'];
-        $formulario['primer_apellido'] = $input['primer_apellido'];
         $formulario['area'] = $input['area'];
+        $formulario['cargo'] = $input['cargo'];
         $formulario['fecha'] = $input['fecha'];
         $formulario['hora'] = $input['hora'];
         $formulario->save();
